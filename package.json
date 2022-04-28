@@ -1,0 +1,124 @@
+{
+  "name": "vs-code-barnard59",
+  "displayName": "Barnard59 explorer",
+  "description": "An experiment",
+  "version": "0.0.1",
+  "publisher": "vscode-samples",
+  "enabledApiProposals": [
+    "treeViewDragAndDrop"
+  ],
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.57.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:jsonOutline",
+    "onView:barnard59Explorer",
+    "onLanguage:json",
+    "onLanguage:jsonc"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "barnard59Explorer",
+          "title": "Barnard 59",
+          "icon": "resources/light/dependency.svg"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "jsonOutline",
+          "name": "Json Outline",
+          "when": "jsonOutlineEnabled"
+        },
+        {
+          "id": "barnard59Explorer",
+          "name": "Barnard 59"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "jsonOutline.refresh",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "jsonOutline.refreshNode",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "jsonOutline.renameNode",
+        "title": "Rename"
+      }
+    ],
+    "menus": {
+      "commandPalette": [],
+      "view/title": [
+        {
+          "command": "jsonOutline.refresh",
+          "when": "view == jsonOutline",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "jsonOutline.renameNode",
+          "when": "view == jsonOutline"
+        },
+        {
+          "command": "jsonOutline.refreshNode",
+          "when": "view == jsonOutline",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "JSON Outline",
+        "properties": {
+          "jsonOutline.autorefresh": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^12.12.0",
+    "@types/rimraf": "^2.0.2",
+    "@types/vscode": "^1.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^8.13.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "jsonc-parser": "^0.4.2",
+    "minimist": "^1.2.6",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
+  }
+}
